@@ -4,12 +4,20 @@ resource "aws_instance" "jenkins_master" {
   subnet_id              = var.subnet_id
   key_name               = var.key_name
   iam_instance_profile   = var.iam_role_name
-  security_group         = var.security_group
+  vpc_security_group_ids = [var.security_group]
   associate_public_ip_address = true
 
   tags = {
     Name = "Jenkins Master"
   }
+
+  block_device {
+    device_name = "/dev/sda1"
+    volume_size = 50  # Size in GB
+    volume_type = "gp3"  # General Purpose SSD, you can choose other types (e.g., gp2, io1)
+    delete_on_termination = true  # Automatically delete the EBS volume when the instance is terminated
+  }
+
   user_data = <<-EOF
               #!/bin/bash
               yum update -y
