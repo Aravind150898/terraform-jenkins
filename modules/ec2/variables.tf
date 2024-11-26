@@ -23,8 +23,18 @@ variable "iam_role_name" {
   type        = string
 }
 
+# modules/ec2/variables.tf
+
+variable "iam_instance_profile_name" {
+  description = "The IAM instance profile to associate with the EC2 instance"
+  type        = string
+}
+
+
 variable "security_group" {
   description = "Security Group ID"
   type        = string
 }
+
+
 
