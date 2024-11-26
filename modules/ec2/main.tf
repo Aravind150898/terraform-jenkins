@@ -11,7 +11,7 @@ resource "aws_instance" "jenkins_master" {
     Name = "Jenkins Master"
   }
 
-  block_device {
+  ebs_block_device {
     device_name = "/dev/sda1"
     volume_size = 50  # Size in GB
     volume_type = "gp3"  # General Purpose SSD, you can choose other types (e.g., gp2, io1)
